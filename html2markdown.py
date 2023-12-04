@@ -77,7 +77,7 @@ def write_to_file(content, filename):
 
 
 
-def getHttpResponse(url,titleID,contentID,cookie_data):
+def getHttpResponse(url, titleID=None, contentID=None, cookie_data=None):
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
         "Accept-Language": "en-US,en;q=0.5",
@@ -87,9 +87,9 @@ def getHttpResponse(url,titleID,contentID,cookie_data):
         "DNT": "1",  # Do Not Track
         # 添加其他所需的头信息
     }
-
-
-    cookies = {cookie["name"]: cookie["value"] for cookie in cookie_data}
+    cookies=""
+    if cookie_data is not None:
+        cookies = {cookie["name"]: cookie["value"] for cookie in cookie_data}
 
     response = requests.get(url, headers=headers, cookies=cookies)
 
@@ -98,17 +98,25 @@ def getHttpResponse(url,titleID,contentID,cookie_data):
     # soup = BeautifulSoup(html_content, 'html.parser')
     # print(html_content)
     soup=html_table_to_markdown(html_content)
+    random_str = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+    random_str = sanitize_filename(random_str)
+    if titleID is not None and titleID!="":
 
-    tittle = str(soup.find(id=titleID))
-    html_content = str(soup.find(id=contentID))
+        tittle = str(soup.find(id=titleID))
+
+    else : tittle=random_str
+    if contentID is None or contentID=="":
+        html_content=str(soup)
+    else :html_content = str(soup.find(id=contentID))
     # print(html_content)
     return [tittle, html_content]
 
     # 现在你可以使用Beautiful Soup的方法来查找和提取页面中的信息
 
 
-def html2markdown(url,titleID,contentID,cookie_data):
-    ans = getHttpResponse(url,titleID,contentID,cookie_data)
+def html2markdown(url, titleID=None, contentID=None, cookie_data=None):
+
+    ans = getHttpResponse(url, titleID, contentID, cookie_data)
 
     # print(html_content)
     tittle = html2text.html2text(ans[0])
@@ -118,4 +126,3 @@ def html2markdown(url,titleID,contentID,cookie_data):
     fileName = sanitize_filename(fileName + "") + ".md"
 
     write_to_file(tittle + html_content, fileName)
- 

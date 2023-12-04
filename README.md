@@ -58,15 +58,15 @@ This directory consists of two files:
 from html2markdown import html2markdown
 html2Markdown(arg1, arg2, arg3, arg4)
 ```
-
-- `arg1`: The URL to be converted.
-- `arg2`: The ID of the title element on the webpage, e.g., "articleContentId" for CSDN.
-- `arg3`: The ID of the content element on the webpage, e.g., "article_content" for CSDN.
-- `arg4`: Cookie information in JSON format. It will be automatically converted to a usable format.
+- Parameter 1: URL to be converted (cannot be empty).
+- Parameter 2: ID of the title element in the website's HTML, such as `articleContentId` on CSDN (if empty, it will be randomly named).
+- Parameter 3: ID of the content element in the website's HTML, such as `article_content` on CSDN (if empty, the entire page will be converted).
+- Parameter 4: Cookie information in JSON format (if empty, no cookie will be used).
 
 #### Demo
 
 There is a `test.py` in the directory containing a sample for users to reference. When obtaining parameters, you can use the browser's F12 to inspect elements.
+
 ## 中文
 
 ### 介绍
@@ -106,10 +106,11 @@ from html2markdown import html2markdown
 html2Markdown(参数1，参数2，参数3，参数4)
 ```
 
-- 参数1:所要转化的网址
-- 参数2:网站中文章的title的id，如在CSDN中为articleContentId
-- 参数3:网站中文章的内容的id，如在CSDN中为article_content
-- 参数4:Cookie信息，Json格式即可，会自动转为可以使用的格式。
+- 参数1:所要转化的网址（不能为空）
+- 参数2:网站中文章的title的id，如在CSDN中为articleContentId （为空值则随机命名）
+- 参数3:网站中文章的内容的id，如在CSDN中为article_content (为空则转化整个页面)
+- 参数4:Cookie信息，Json格式即可，会自动转为可以使用的格式。(为空则不使用cookie)
+
 
 #### demo
 

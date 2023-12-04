@@ -15,5 +15,10 @@ from html2markdown import html2markdown
 # argument4: Cookie information in JSON format. It will be automatically converted to a usable format.
 
 
-html2markdown("https://lunatic.blog.csdn.net/article/details/105257626","articleContentId","article_content","")
+html2markdown("https://www.cnblogs.com/xiaoyuanqujing/articles/11656492.html")
 
+
+html2markdown("https://www.cnblogs.com/xiaoyuanqujing/articles/11656492.html","","","")
+
+
+html2markdown("https://www.cnblogs.com/xiaoyuanqujing/articles/11656492.html","articleContentId","article_content")
